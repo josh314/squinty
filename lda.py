@@ -1,6 +1,6 @@
 import sys
 if len(sys.argv) != 2:
-    print "Usage: python k-fold-cv.py <pickled model output>"
+    print "Usage: python lda.py <pickled model output>"
     raise SystemExit(1)
 import os
 import pickle
