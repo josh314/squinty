@@ -13,8 +13,8 @@ parser = optparse.OptionParser()
 
 parser.add_option("-o", action="store", type="string", dest="o")
 parser.add_option("-n", action="store", type="int", dest="n")
-parser.add_option("-m", action="store", type="string", dest="m")
-parser.set_defaults(o="out.csv", n=14*14, m="agglo.p")
+parser.add_option("-a", action="store", type="string", dest="a")
+parser.set_defaults(o="out.csv", n=14*14, a="agglo.p")
 opts, args = parser.parse_args()
 
 if(len(args) < 1):
@@ -24,7 +24,7 @@ if(len(args) < 1):
 infile = args[0]
 outfile = opts.o
 n_clusters = opts.n
-model_fn = opts.m
+agglo_fn = opts.a
 
 #Other imports
 import pickle
@@ -51,7 +51,7 @@ agglo.fit(image_data)
 
 # Save agglo for future use in workflow.
 # Must use this same agglo for test data
-barrel=open(model_fn,'wb')
+barrel=open(agglo_fn,'wb')
 pickle.dump(agglo,barrel)
 barrel.close()
 
