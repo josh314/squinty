@@ -12,7 +12,7 @@ from sklearn import svm
 
 train = pd.read_csv(train_fn,header=0)
 
-num_fit = 100#len(train)
+num_fit = len(train)
 #Separate out label data and convert to numpy array
 train_predictor_data = train.iloc[ :num_fit, 1:].values
 train_target_data = train.iloc[ :num_fit, 0].values
