@@ -29,10 +29,10 @@ train_predictor_data = train.iloc[ :num_fit, 1:].values
 train_target_data = train.iloc[ :num_fit, 0].values
 
 #Train dat sucker
-Cs = np.logspace(3, 5, 8)
-#gammas = np.logspace(-8, -1, 14)
-svc = svm.SVC(gamma=1e-8)
-clf = GridSearchCV(estimator=svc, param_grid=dict(C=Cs),n_jobs=-1)
+Cs = np.logspace(-1, 1, 16)
+gammas = np.logspace(-7, -5, 16)
+svc = svm.SVC()
+clf = GridSearchCV(estimator=svc, param_grid=dict(C=Cs,gamma=gammas),n_jobs=-1)
 clf.fit(train_predictor_data, train_target_data)
 
 #Save model
