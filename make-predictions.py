@@ -1,22 +1,18 @@
 import sys
 if len(sys.argv) != 3:
-    print "Usage: python k-fold-cv.py <model input> <prediction out>"
+    print "Usage: python make-predictions.py <model input> <test data CSV> <prediction out CSV>"
     raise SystemExit(1)
-import os
 import pickle
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn import lda 
-
-os.chdir('/Users/josh/dev/kaggle/digit-recognizer')
 
 #Deserialize model
 barrel = open(sys.argv[1], 'rb')
 clf = pickle.load(barrel)
 barrel.close()
 
-test = pd.read_csv('data/raw/test.csv',header=0)
+test = pd.read_csv(sys.argv[2],header=0)
 
 num_test = len(test)
 #Load test data and make predictions
@@ -25,7 +21,7 @@ preds = clf.predict(test_data)
 
 #Predictions out to file
 out = pd.DataFrame(zip(range(1,len(preds)+1),preds),columns=('ImageId','Label'))
-out.to_csv(sys.argv[2],index=False)
+out.to_csv(sys.argv[3],index=False)
 
 
 #Display images and predictions for a few random obvs
