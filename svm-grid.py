@@ -28,12 +28,12 @@ train_predictor_data = train.iloc[ :, 1:].values
 train_target_data = train.iloc[ :, 0].values
 
 #Train dat sucker
-Cs = np.linspace(1,10,10)
-gammas = np.linspace(1e-6, 1e-4, 10)
-svc = svm.SVC()
-params = dict(C=Cs,gamma=gammas)
-cv = ShuffleSplit(len(train), test_size=num_fit, train_size=num_fit, random_state=0)
-clf = GridSearchCV(estimator=svc, cv=cv, param_grid=params ,n_jobs=-1)
+Cs = np.linspace(3,10,10)
+gammas = np.logspace(-7, -4, 4)
+svc = svm.SVC(gamma=2e-6)
+params = dict(C=Cs)
+cv = ShuffleSplit(len(train_predictor_data), test_size=num_fit, train_size=num_fit, random_state=0)
+clf = GridSearchCV(estimator=svc, cv=cv, param_grid=params, n_jobs=-1)
 clf.fit(train_predictor_data, train_target_data)
 
 #Save model
