@@ -1,26 +1,40 @@
-import os
+import optparse
+parser = optparse.OptionParser()
+
+parser.add_option("-t", action="store_true", dest="t")
+parser.add_option("-n", action="store", type="int", dest="n")
+parser.set_defaults(t=False, n=0)
+opts, args = parser.parse_args()
+
+if(len(args) < 1):
+    print "Usage: python svm.py <input CSV> [options]"
+    raise SystemExit(1)
+
+infile = args[0]
+is_training_set = opts.t
+num_display = opts.n
+
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-os.chdir('/Users/josh/dev/kaggle/digit-recognizer')
-train = pd.read_csv('data/raw/train.csv', header=0)
+train = pd.read_csv(infile, header=0)
 
-#Which image do we want to view? Doesn't really matter, just pick one
-image_idx = 2300
-label = train.loc[image_idx,'label']
-
-#Print the label for verification purpose
-print("Image %d has been labeled as a numeral %d\n" % (image_idx, label))
+#Label if applicable
+label = ""
+if(is_training_set):
+    label = train.loc[num_display,'label']
 
 #Get the pixel data for one of the images.
-#column 1 is the training label, so skip that 
-image_flat = train.iloc[image_idx,1:].values
-
+#column 1 is the training label if applicable, so skip that 
 #Expand the flat array into 2-dimensional data. Images are 28x28 pixels
-#image = np.reshape(image_flat, (28,28)) #Alternate equivalent static command
+skip = 1 if is_training_set else 0
+image_flat = train.iloc[num_display,skip:].values
 image = image_flat.reshape(28,28)
 
 #Add image to plot in grayscale
 plt.imshow(image, cmap=plt.cm.gray_r, interpolation='nearest')
+if(is_training_set):
+    plt.title('%d' % label)
+
 plt.show()

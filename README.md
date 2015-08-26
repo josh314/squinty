@@ -22,6 +22,6 @@ Image rendering code
 =====================
 There is a little image rendering code in this repo as well.
  
-- `render-images.py` will display a single image and its label from the full resolution training set (currently file location and image shown are hardcoded in). 
+- `render-images.py` will display a single image and its label from either the full resolution training set or test set. Use the `-t` flag for the training set 
 - After performing feature clustering, a block at the end of `train-agglo.py` displays 25 random reduced training images as a demo
 - After calculating the test set predictions the `make-predictions.py` script displays 25 random reduced test images and labeled with their predictions. 
