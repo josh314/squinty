@@ -8,7 +8,7 @@ Example Workflow
 ================
 In detail, an example workflow as follows.
 
-`train-agglo.py data/raw/train.cvs -n49 -r agglo-49.p -o data/build/train-49.csv`
+`train-agglo.py data/raw/train.csv -n49 -r agglo-49.p -o data/build/train-49.csv`
 
 This trains and pickles a reducer object (in this case `sklearn.featureAgglomeration` with 49 clusters). The transformed training data is saved in the `train-49.csv` file. Use this transformed training data to train a model
 
