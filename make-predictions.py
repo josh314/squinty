@@ -3,24 +3,23 @@ parser = optparse.OptionParser()
 
 parser.add_option("-o", action="store", type="string", dest="o")
 parser.add_option("-m", action="store", type="string", dest="m")
-parser.add_option("-a", action="store", type="string", dest="a")
-parser.add_option("-i", action="store", type="string", dest="i")
-parser.set_defaults(o="out.csv", m="", a="", d="i")
+parser.add_option("-r", action="store", type="string", dest="r")
+parser.set_defaults(o="out.csv", m="", r="")
 opts, args = parser.parse_args()
 
-infile = opts.d
+infile = args[0]
 outfile = opts.o
 model_fn = opts.m
-agglo_fn = opts.a
+reducer_fn = opts.r
 
 import pickle
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-#Deserialize object for pre-processing test data
-barrel = open(pre_fn, 'rb')
-pre = pickle.load(barrel)
+#Deserialize reducer object for pre-processing test data
+barrel = open(reducer_fn, 'rb')
+reducer = pickle.load(barrel)
 barrel.close()
 
 #Load test data and make predictions
@@ -28,7 +27,7 @@ test = pd.read_csv(infile,header=0)
 num_test = len(test)
 test_data = test.iloc[:num_test,:].values
 
-test_data_reduced = pre.transform(test_data)
+test_data_reduced = reducer.transform(test_data)
 
 
 #Deserialize model
@@ -44,7 +43,7 @@ out.to_csv(outfile,index=False)
 
 #Display images and predictions for a few random obvs
 num_row, num_col  = 5, 5
-image_data_approx = pre.inverse_transform(test_data_reduced)
+image_data_approx = reducer.inverse_transform(test_data_reduced)
 sample = np.random.choice(range(0,num_test), num_row*num_col, replace=False)
 for idx, sample_idx in enumerate(sample):
     plt.subplot(num_row, num_col, idx + 1)

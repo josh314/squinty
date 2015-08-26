@@ -13,8 +13,8 @@ parser = optparse.OptionParser()
 
 parser.add_option("-o", action="store", type="string", dest="o")
 parser.add_option("-n", action="store", type="int", dest="n")
-parser.add_option("-a", action="store", type="string", dest="a")
-parser.set_defaults(o="out.csv", n=14*14, a="agglo.p")
+parser.add_option("-r", action="store", type="string", dest="r")
+parser.set_defaults(o="out.csv", n=14*14, r="reducer.p")
 opts, args = parser.parse_args()
 
 if(len(args) < 1):
@@ -24,7 +24,7 @@ if(len(args) < 1):
 infile = args[0]
 outfile = opts.o
 n_clusters = opts.n
-agglo_fn = opts.a
+reducer_fn = opts.r
 
 #Other imports
 import pickle
@@ -51,7 +51,7 @@ agglo.fit(image_data)
 
 # Save agglo for future use in workflow.
 # Must use this same agglo for test data
-barrel=open(agglo_fn,'wb')
+barrel=open(reducer_fn,'wb')
 pickle.dump(agglo,barrel)
 barrel.close()
 
@@ -63,8 +63,8 @@ out = pd.DataFrame(image_data_reduced)
 out.insert(0, 'label', labels)#Add back the target labels 
 out.to_csv(outfile,index=False)
 
-#
-#Display some approx images to get a sense of what has been stripped out
+### Uncomment below to see some demo approx images
+
 # import matplotlib.pyplot as plt
 #Go back to real space from eigenpixel space
 # image_data_approx = agglo.inverse_transform(image_data_reduced)
