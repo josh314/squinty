@@ -1,0 +1,1 @@
+This project code is a set of command line scripts for solving the Kaggle digit recignizer competition. (https://www.kaggle.com/c/digit-recognizer)
