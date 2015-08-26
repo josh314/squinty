@@ -3,7 +3,7 @@
 #
 # Usage: python2 train-agglo.py <training data> [options]
 #
-# Builds the agglo (Agglommerative clusting object) which
+# Builds the a data transformer (FeatureAgglomeration clusting object) which
 # reduces problem dimension
 
 #Parse command line options and arguments
