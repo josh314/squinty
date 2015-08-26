@@ -1,5 +1,7 @@
 This repo contains code for solving a basic machine vision proble, specifically the [Kaggle digit recognizer competition](https://www.kaggle.com/c/digit-recognizer). The goal is to correctly label images with the Arabic numerals they picture. The training data is a set of 42,000 labeled images, each with 784 pixels (28 pixels by 28 pixels square image). The test data consists of 28,000 such images. All data is in CSV format.
 
+The solution scenario was to use a feature agglomeration to reduce the problem dimension. A SVC is then trained on this reduced training data. Predictions are made by performing the same reduction on the test data before applying the trained SVC. Hyperparameter selection for the SVC is done by a combination of cross validated grid search and manual selection.
+
 The code consists of a number of short command line scripts. The workflow digests the training data in a series of scripts that build models and transformation objects and saves them to file via pickle. The predictions scripts consume these pickled objects and the test data to produce the prediction file.
 
 Example Workflow
