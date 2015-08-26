@@ -17,3 +17,11 @@ The `-n` flag sets the number of training points per CV-fold. The trained model 
 `make-predictions.py data/raw/test.csv -o predictions.csv -m svm-49-model.p -r agglo.p`
 
 using flags to indicate the output predictions file, and input model and reducer objects.
+
+Image rendering code
+=====================
+There is a little image rendering code in this repo as well.
+ 
+- `render-images.py` will display a single image and its label from the full resolution training set (currently file location and image shown are hardcoded in). 
+- After performing feature clustering, a block at the end of `train-agglo.py` displays 25 random reduced training images as a demo
+- After calculating the test set predictions the `make-predictions.py` script displays 25 random reduced test images and labeled with their predictions. 
