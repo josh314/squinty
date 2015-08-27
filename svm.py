@@ -18,24 +18,16 @@ import pickle
 import pandas as pd
 import numpy as np
 from sklearn import svm
-from sklearn.grid_search import GridSearchCV
-from sklearn.cross_validation import ShuffleSplit
 
 train = pd.read_csv(train_fn,header=0)
 
 #Separate out label data and convert to numpy array
-train_predictor_data = train.iloc[ :, 1:].values
-train_target_data = train.iloc[ :, 0].values
+train_predictor_data = train.iloc[ :num_fit, 1:].values
+train_target_data = train.iloc[ :num_fit, 0].values
 
-#Train dat sucker
-Cs = np.linspace(1,20,8)
-gammas = np.linspace(7.5e-6, 1e-4, 8)
-svc = svm.SVC()
-params = dict(C=Cs,gamma=gammas)
-train_size = num_fit
-test_size = num_fit // 2 
-cv = ShuffleSplit(len(train_predictor_data), test_size=test_size, train_size=train_size, random_state=0)
-clf = GridSearchCV(estimator=svc, cv=cv, param_grid=params, n_jobs=-1)
+#Estimator constructor 
+clf = svm.SVC(C=3.1622776601683795,gamma=1.7782794100389229e-05,verbose=True)
+#Training montage
 clf.fit(train_predictor_data, train_target_data)
 
 #Save model

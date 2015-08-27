@@ -32,9 +32,11 @@ test_data_reduced = reducer.transform(test_data)
 
 #Deserialize model
 barrel = open(model_fn, 'rb')
-clf_cv = pickle.load(barrel)
+clf = pickle.load(barrel)
 barrel.close()
-preds = clf_cv.best_estimator_.predict(test_data_reduced)
+
+#Make predictions
+preds = clf.predict(test_data_reduced)
 
 #Predictions out to file
 out = pd.DataFrame(zip(range(1,len(preds)+1),preds),columns=('ImageId','Label'))
