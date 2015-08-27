@@ -29,7 +29,7 @@ train_target_data = train.iloc[ :, 0].values
 
 #Train dat sucker
 Cs = np.linspace(1,20,8)
-gammas = np.linspace(7.5e-6, 1e-4, 8)
+gammas = np.linspace(1e-7, 1e-4, 8)
 svc = svm.SVC()
 params = dict(C=Cs,gamma=gammas)
 train_size = num_fit
