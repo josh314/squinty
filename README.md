@@ -16,7 +16,7 @@ This trains and pickles a reducer object (in this case `sklearn.featureAgglomera
 
 The `-n` flag sets the number of training points per CV-fold. The trained model is output to `svm-49-model.p`. Finally, predictions for test data can be obtained
 
-`make-predictions.py data/raw/test.csv -o predictions.csv -m svm-49-model.p -r agglo.p`
+`make-predictions.py data/raw/test.csv -o predictions.csv -m svm-49-model.p -r agglo-49.p`
 
 using flags to indicate the output predictions file, and input model and reducer objects.
 
